@@ -77,7 +77,7 @@ Create a resource group to contain your Azure AI Foundry resources.
 
 ```shell
 # 変数の設定
-set resourceGroupName "rg-aifoundry-demo"
+set resourceGroupName "rg-aifoundry-demo-"(date +%Y%m%d)
 set location "eastus"
 
 # リソースグループの作成

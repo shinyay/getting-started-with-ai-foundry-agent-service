@@ -1,0 +1,6 @@
+@BookConnect.Api_HostAddress = http://localhost:5205
+
+GET {{BookConnect.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

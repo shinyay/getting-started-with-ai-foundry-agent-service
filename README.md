@@ -255,6 +255,31 @@ az role assignment list \
     --output table
 ```
 
+### Troubleshooting
+
+#### Common Issues and Solutions
+
+1. **Token Expiration Error**: If you encounter authentication issues, refresh your token:
+   ```shell
+   az login --scope https://management.azure.com/.default
+   ```
+
+2. **Resource Provider Registration**: Ensure all required providers are registered:
+   ```shell
+   # Check registration status
+   az provider list --query "[?namespace=='Microsoft.CognitiveServices'].registrationState" --output table
+   ```
+
+3. **Permission Issues**: Verify you have the correct roles assigned:
+   ```shell
+   az role assignment list --assignee $currentUser --all --output table
+   ```
+
+4. **Regional Availability**: Check if Azure AI Foundry Agent Service is available in your selected region:
+   ```shell
+   az provider show --namespace Microsoft.CognitiveServices --query "resourceTypes[?resourceType=='accounts'].locations" --output table
+   ```
+
 
 ## References
 

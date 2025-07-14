@@ -224,7 +224,9 @@ az search service show \
     --output table
 ```
 
-### Step 6: Configure Permissions
+### Step 6: Create Supporting Services
+
+#### Configure Permissions
 
 #### Get Current User Object ID
 
@@ -255,30 +257,121 @@ az role assignment list \
     --output table
 ```
 
-### Troubleshooting
 
-#### Common Issues and Solutions
+### Step 7: Create an AI Agent using Azure AI Foundry Portal
 
-1. **Token Expiration Error**: If you encounter authentication issues, refresh your token:
-   ```shell
-   az login --scope https://management.azure.com/.default
+Now that you have set up the required Azure resources, you can create an AI agent using the Azure AI Foundry Portal.
+
+#### Prerequisites for Agent Creation
+
+Before creating an agent, ensure you have the following:
+
+1. **Required Azure Roles**:
+   - **Azure AI Developer** role or **Azure AI User** role assigned at the project scope
+   - Minimum required permissions: `agents/*/read`, `agents/*/action`, `agents/*/delete`
+
+2. **Azure AI Foundry Project**:
+   - An Azure AI Foundry Hub and Project must be created
+   - A model (like GPT-4o) should be deployed
+
+#### Step-by-Step Agent Creation Process
+
+**Step 6.1: Access Azure AI Foundry Portal**
+
+1. Navigate to [Azure AI Foundry Portal](https://ai.azure.com)
+2. Sign in with your Azure credentials
+3. If you're in a project, select "Azure AI Foundry" at the top left to go to the Home page
+
+**Step 6.2: Create a New Project (if not already done)**
+
+1. Click **"Create an agent"** for the fastest experience
+2. Enter a name for your project (e.g., "AI-Agent-Demo-Project")
+3. If you want to customize default values, select **"Advanced options"**
+4. Select **"Create"**
+5. Wait for resources to be provisioned:
+   - An account and project will be created
+   - The GPT-4o model will automatically be deployed
+   - A default agent will be created
+
+**Step 6.3: Configure Your AI Agent**
+
+1. Once provisioning is complete, you'll land in the **Agent Playground**
+2. In the left sidebar, navigate to **"Build and customize"** → **"Agents"**
+3. Select **"+ New agent"** to create a new agent
+4. Configure the following components:
+
+   **Basic Configuration:**
+   - **Agent Name**: Give your agent a descriptive name (e.g., "Customer Support Agent")
+   - **Description**: Add a brief description of what your agent does
+   - **Model Selection**: Choose your deployed model (GPT-4o is recommended)
+
+   **System Instructions:**
+   Add detailed instructions for your agent. Example:
+   ```
+   You are a helpful customer support agent for a technology company.
+   You can answer questions about products, help with troubleshooting,
+   and provide information about services. Always be polite, professional,
+   and helpful. If you don't know something, admit it and offer to
+   connect the customer with a human specialist.
    ```
 
-2. **Resource Provider Registration**: Ensure all required providers are registered:
-   ```shell
-   # Check registration status
-   az provider list --query "[?namespace=='Microsoft.CognitiveServices'].registrationState" --output table
-   ```
+   **Advanced Settings:**
+   - **Temperature**: Adjust creativity (0.1 for more deterministic, 0.9 for more creative)
+   - **Top P**: Control response diversity (0.1 for focused, 1.0 for diverse)
 
-3. **Permission Issues**: Verify you have the correct roles assigned:
-   ```shell
-   az role assignment list --assignee $currentUser --all --output table
-   ```
+**Step 6.4: Add Tools and Capabilities**
 
-4. **Regional Availability**: Check if Azure AI Foundry Agent Service is available in your selected region:
-   ```shell
-   az provider show --namespace Microsoft.CognitiveServices --query "resourceTypes[?resourceType=='accounts'].locations" --output table
-   ```
+Your agent can be enhanced with various tools:
+
+1. **Code Interpreter**: Enable for data analysis and code execution
+2. **Knowledge Sources**: Upload files or connect to Azure AI Search indexes
+3. **Custom Functions**: Add Azure Functions for external integrations (via SDK)
+
+**Step 6.5: Test Your Agent**
+
+1. In the **Agent Playground**, start a conversation with your agent
+2. Test various scenarios relevant to your use case
+3. Verify that the agent responds appropriately to different types of questions
+4. Test any uploaded knowledge sources by asking specific questions about the content
+
+**Step 6.6: Deploy and Share**
+
+1. Once satisfied with your agent's performance, you can:
+   - Share the playground link with team members
+   - Integrate the agent into applications using the Azure AI SDK
+   - Export agent configuration for version control
+
+#### Example Agent Scenarios
+
+**Basic Customer Support Agent:**
+```
+System Instructions: "You are a customer support agent for an e-commerce platform.
+Help customers with order inquiries, return policies, and product information.
+Always ask for order numbers when relevant and provide clear, step-by-step guidance."
+```
+
+**Technical Documentation Assistant:**
+```
+System Instructions: "You are a technical documentation assistant. Help developers
+understand API documentation, provide code examples, and troubleshoot integration issues.
+Always reference official documentation and provide working code snippets when possible."
+```
+
+**HR Policy Assistant:**
+```
+System Instructions: "You are an HR assistant helping employees understand company
+policies, benefits, and procedures. Provide accurate information from uploaded
+policy documents and guide employees to appropriate resources or contacts."
+```
+
+#### Next Steps
+
+After creating your basic agent:
+
+1. **Enhance with RAG**: Upload company documents for knowledge grounding
+2. **Add Custom Tools**: Integrate with external APIs using Azure Functions
+3. **Monitor Performance**: Track agent conversations and improve instructions
+4. **Scale Deployment**: Integrate into applications using the Azure AI SDK
 
 
 ## References

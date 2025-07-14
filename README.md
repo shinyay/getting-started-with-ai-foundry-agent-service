@@ -17,9 +17,31 @@
 
 ### Step 1: Azure CLI Login
 
+To interact with Azure services, you need to log in using the Azure CLI. Open your terminal and run the following command:
+
 ```shell
 az login
 ```
+
+List your Azure subscriptions to ensure you have access:
+
+```shell
+az account list --output table
+```
+
+Set your desired subscription as the active one:
+
+```shell
+az account set --subscription "YOUR_SUBSCRIPTION_ID"
+```
+
+Show the current active subscription to confirm:
+
+```shell
+az account show --output table
+```
+
+
 
 ## References
 

@@ -15,7 +15,7 @@ public static class DependencyInjection
     {
         // Database
         services.AddDbContext<ReadingExperienceDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
 
         // Repositories
         services.AddScoped<IUserRepository, UserRepository>();

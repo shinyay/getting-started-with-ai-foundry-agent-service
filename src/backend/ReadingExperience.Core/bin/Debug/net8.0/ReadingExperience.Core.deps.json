@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "ReadingExperience.Core/1.0.0": {
+        "runtime": {
+          "ReadingExperience.Core.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ReadingExperience.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -41,6 +41,11 @@ Show the current active subscription to confirm:
 az account show --output table
 ```
 
+### Step 2: Register Required Resource Providers
+
+Before creating resources, you need to register the necessary Azure resource providers.
+
+Run the following commands in your terminal:
 
 
 ## References

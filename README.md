@@ -1,4 +1,4 @@
-# Title
+# Azure AI Foundry - Agent Service
 
 ## Description
 
@@ -13,7 +13,13 @@
 
 ## Usage
 
-## Installation
+## Installation/Tutorial
+
+### Step 1: Azure CLI Login
+
+```shell
+az login
+```
 
 ## References
 

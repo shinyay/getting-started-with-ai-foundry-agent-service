@@ -2031,6 +2031,22 @@ graph TD
     F --> G[Security & Compliance]
     G --> H[Technical Detail Design]
     H --> A
+
+    subgraph P1[Phase 1: Business Requirements]
+        B
+        C
+    end
+
+    subgraph P2[Phase 2: System Requirements]
+        D
+        E
+        F
+    end
+
+    subgraph P3[Phase 3: Detailed Design]
+        G
+        H
+    end
 ```
 
 #### Expected Deliverables

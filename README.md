@@ -134,7 +134,126 @@ az cognitiveservices account show \
     --output json
 ```
 
+### Step 5: Create Supporting Resources
 
+#### Create a Storage Account
+
+Create a storage account to store data and models used by the Azure AI Foundry Agent Service.
+
+```shell
+# 変数の設定（短縮名 + 日付でユニークな名前を生成）
+set storageAccountName "staifoundry"(date +%Y%m%d)
+
+# Storage Accountの作成
+az storage account create \
+    --name $storageAccountName \
+    --resource-group $resourceGroupName \
+    --location $location \
+    --sku "Standard_LRS" \
+    --kind "StorageV2"
+
+# Storage Accountの詳細確認
+az storage account show \
+    --name $storageAccountName \
+    --resource-group $resourceGroupName \
+    --output table
+```
+
+#### Create Azure Cosmos DB Account
+
+Create an Azure Cosmos DB account to store structured data for the AI Foundry Agent Service.
+
+```shell
+# 変数の設定
+set cosmosAccountName "cosmos-aifoundry-demo"
+
+# 注意: East USで容量不足の場合は、別のリージョンを試してください
+# 代替リージョンの例: westus2, centralus, westeurope
+# set alternativeLocation "westus2"
+
+# Option 1: 元のリージョン（eastus）で作成を試行
+az cosmosdb create \
+    --name $cosmosAccountName \
+    --resource-group $resourceGroupName \
+    --locations regionName=$location \
+    --default-consistency-level "Session" \
+    --enable-automatic-failover false
+
+# Option 2: 容量不足の場合は代替リージョンを使用
+# 前回の作成が失敗した場合は、まず既存のインスタンスを削除
+# az cosmosdb delete \
+#     --name $cosmosAccountName \
+#     --resource-group $resourceGroupName \
+#     --yes
+
+# 削除完了を待ってから再作成
+# set alternativeLocation "westus2"
+# az cosmosdb create \
+#     --name $cosmosAccountName \
+#     --resource-group $resourceGroupName \
+#     --locations regionName=$alternativeLocation \
+#     --default-consistency-level "Session" \
+#     --enable-automatic-failover false
+
+# Cosmos DB Accountの確認
+az cosmosdb show \
+    --name $cosmosAccountName \
+    --resource-group $resourceGroupName \
+    --output table
+```
+
+#### Create Azure AI Search Service
+
+Create Azure AI Search Service to enable search capabilities for your AI Foundry Agent Service.
+
+```shell
+# 変数の設定
+set searchServiceName "search-aifoundry-demo"
+
+# Azure AI Search Serviceの作成
+az search service create \
+    --name $searchServiceName \
+    --resource-group $resourceGroupName \
+    --location $location \
+    --sku "Basic"
+
+# Search Serviceの確認
+az search service show \
+    --name $searchServiceName \
+    --resource-group $resourceGroupName \
+    --output table
+```
+
+### Step 6: Configure Permissions
+
+#### Get Current User Object ID
+
+```shell
+# 現在のユーザーのオブジェクトIDを取得
+set currentUser (az ad signed-in-user show --query id --output tsv)
+echo "Current User ID: $currentUser"
+```
+
+#### Assign Roles
+
+Assign the appropriate roles to the current user for the AI account.
+
+```shell
+# サブスクリプションIDの取得
+set subscriptionId (az account show --query id --output tsv)
+
+# Azure AI Administrator ロールをAIアカウントに付与
+az role assignment create \
+    --assignee $currentUser \
+    --role "Azure AI Administrator" \
+    --scope "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.CognitiveServices/accounts/$aiAccountName"
+
+# 権限の確認
+az role assignment list \
+    --assignee $currentUser \
+    --scope "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName" \
+    --output table
+```
 
 
 ## References

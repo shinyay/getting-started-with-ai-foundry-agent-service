@@ -47,6 +47,48 @@ Before creating resources, you need to register the necessary Azure resource pro
 
 Run the following commands in your terminal:
 
+```shell
+# Microsoft.CognitiveServicesリソースプロバイダーの登録
+az provider register --namespace Microsoft.CognitiveServices
+
+# Microsoft.MachineLearningServicesリソースプロバイダーの登録（AI Foundryで使用）
+az provider register --namespace Microsoft.MachineLearningServices
+
+# Microsoft.Searchリソースプロバイダーの登録（検索機能用）
+az provider register --namespace Microsoft.Search
+
+# Microsoft.Storageリソースプロバイダーの登録（ストレージ用）
+az provider register --namespace Microsoft.Storage
+
+# Microsoft.DocumentDBリソースプロバイダーの登録（Cosmos DB用）
+az provider register --namespace Microsoft.DocumentDB
+
+# 登録状況の包括的確認
+az provider show --namespace Microsoft.CognitiveServices --query "registrationState" --output tsv
+az provider show --namespace Microsoft.MachineLearningServices --query "registrationState" --output tsv
+az provider show --namespace Microsoft.Search --query "registrationState" --output tsv
+az provider show --namespace Microsoft.Storage --query "registrationState" --output tsv
+az provider show --namespace Microsoft.DocumentDB --query "registrationState" --output tsv
+```
+
+### Step 3: Create a Resource Group
+
+Create a resource group to contain your Azure AI Foundry resources.
+
+```shell
+# 変数の設定
+set resourceGroupName "rg-aifoundry-demo"
+set location "eastus"
+
+# リソースグループの作成
+az group create --name $resourceGroupName --location $location
+
+# 作成されたリソースグループの確認
+az group show --name $resourceGroupName --output table
+```
+
+### Step 4: Creat
+
 
 ## References
 

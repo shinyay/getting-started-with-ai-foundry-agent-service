@@ -9,7 +9,6 @@ namespace BookConnect.Api.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    [Authorize]
     public class BooksController : ControllerBase
     {
         private readonly BookConnectDbContext _context;
@@ -29,6 +28,8 @@ namespace BookConnect.Api.Controllers
         {
             try
             {
+                _logger.LogInformation("Books endpoint called with query: {Query}", q ?? "null");
+                
                 var query = _context.Books.AsQueryable();
 
                 if (!string.IsNullOrWhiteSpace(q))
@@ -50,6 +51,7 @@ namespace BookConnect.Api.Controllers
                     })
                     .ToListAsync();
 
+                _logger.LogInformation("Returning {Count} books", books.Count);
                 return Ok(books);
             }
             catch (Exception ex)

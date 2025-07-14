@@ -18,21 +18,32 @@ builder.Services.AddDbContext<BookConnectDbContext>(options =>
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        // In production, configure with proper JWT settings
+        // For development, disable authentication requirements
         options.RequireHttpsMetadata = false;
         options.SaveToken = true;
         options.Events = new JwtBearerEvents
         {
             OnTokenValidated = context =>
             {
-                // For development, allow any token
-                // In production, validate against Azure AD B2C
+                // Set a default user identity for development
+                context.Principal = new System.Security.Claims.ClaimsPrincipal(
+                    new System.Security.Claims.ClaimsIdentity(
+                        new[] { new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Name, "user@example.com") },
+                        "Development"));
                 return Task.CompletedTask;
             },
-            OnAuthenticationFailed = context =>
+            OnChallenge = context =>
             {
-                // For development, continue without authentication
-                context.Response.StatusCode = 401;
+                // For development, allow unauthenticated access
+                context.HandleResponse();
+                context.Response.StatusCode = 200;
+                
+                // Set a default user identity for development
+                context.HttpContext.User = new System.Security.Claims.ClaimsPrincipal(
+                    new System.Security.Claims.ClaimsIdentity(
+                        new[] { new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Name, "user@example.com") },
+                        "Development"));
+                        
                 return Task.CompletedTask;
             }
         };
@@ -97,8 +108,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookConnect API v1");
-        c.RoutePrefix = string.Empty; // Serve Swagger UI at root
+        c.RoutePrefix = "swagger"; // Serve Swagger UI at /swagger
     });
+    
+    // Redirect root to Swagger for development
+    app.MapGet("/", () => Results.Redirect("/swagger"));
 }
 
 app.UseHttpsRedirection();

@@ -1,0 +1,12 @@
+/home/runner/work/getting-started-with-ai-foundry-agent-service/getting-started-with-ai-foundry-agent-service/src/backend/ReadingExperience.Core/obj/Debug/net8.0/ReadingExperience.Core.GeneratedMSBuildEditorConfig.editorconfig
+/home/runner/work/getting-started-with-ai-foundry-agent-service/getting-started-with-ai-foundry-agent-service/src/backend/ReadingExperience.Core/obj/Debug/net8.0/ReadingExperience.Core.AssemblyInfoInputs.cache
+/home/runner/work/getting-started-with-ai-foundry-agent-service/getting-started-with-ai-foundry-agent-service/src/backend/ReadingExperience.Core/obj/Debug/net8.0/ReadingExperience.Core.AssemblyInfo.cs
+/home/runner/work/getting-started-with-ai-foundry-agent-service/getting-started-with-ai-foundry-agent-service/src/backend/ReadingExperience.Core/obj/Debug/net8.0/ReadingExperience.Core.csproj.CoreCompileInputs.cache
+/home/runner/work/getting-started-with-ai-foundry-agent-service/getting-started-with-ai-foundry-agent-service/src/backend/ReadingExperience.Core/obj/Debug/net8.0/ReadingExperience.Core.sourcelink.json
+/home/runner/work/getting-started-with-ai-foundry-agent-service/getting-started-with-ai-foundry-agent-service/src/backend/ReadingExperience.Core/bin/Debug/net8.0/ReadingExperience.Core.deps.json
+/home/runner/work/getting-started-with-ai-foundry-agent-service/getting-started-with-ai-foundry-agent-service/src/backend/ReadingExperience.Core/bin/Debug/net8.0/ReadingExperience.Core.dll
+/home/runner/work/getting-started-with-ai-foundry-agent-service/getting-started-with-ai-foundry-agent-service/src/backend/ReadingExperience.Core/bin/Debug/net8.0/ReadingExperience.Core.pdb
+/home/runner/work/getting-started-with-ai-foundry-agent-service/getting-started-with-ai-foundry-agent-service/src/backend/ReadingExperience.Core/obj/Debug/net8.0/ReadingExperience.Core.dll
+/home/runner/work/getting-started-with-ai-foundry-agent-service/getting-started-with-ai-foundry-agent-service/src/backend/ReadingExperience.Core/obj/Debug/net8.0/refint/ReadingExperience.Core.dll
+/home/runner/work/getting-started-with-ai-foundry-agent-service/getting-started-with-ai-foundry-agent-service/src/backend/ReadingExperience.Core/obj/Debug/net8.0/ReadingExperience.Core.pdb
+/home/runner/work/getting-started-with-ai-foundry-agent-service/getting-started-with-ai-foundry-agent-service/src/backend/ReadingExperience.Core/obj/Debug/net8.0/ref/ReadingExperience.Core.dll

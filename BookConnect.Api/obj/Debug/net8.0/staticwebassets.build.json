@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "acOudHItzDpN1d1J1LE7UacWfS9VYLFbvva16KRy9Uo=",
+  "Source": "BookConnect.Api",
+  "BasePath": "_content/BookConnect.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -87,7 +87,33 @@ az group create --name $resourceGroupName --location $location
 az group show --name $resourceGroupName --output table
 ```
 
-### Step 4: Creat
+### Step 4: Create an Azure AI Foundry Account
+
+Create an Azure AI Foundry account to start using the service.
+
+```shell
+# 変数の設定
+set aiAccountName "ai-foundry-account-demo"
+set resourceGroupName "rg-aifoundry-demo"
+set location "eastus"
+
+# Azure AI Foundryアカウントの作成（AIServices kind を使用）
+az cognitiveservices account create \
+    --name $aiAccountName \
+    --resource-group $resourceGroupName \
+    --location $location \
+    --kind "AIServices" \
+    --sku "S0" \
+    --custom-domain $aiAccountName \
+    --yes
+
+# 作成されたアカウントの確認
+az cognitiveservices account show \
+    --name $aiAccountName \
+    --resource-group $resourceGroupName \
+    --output table
+```
+
 
 
 ## References
